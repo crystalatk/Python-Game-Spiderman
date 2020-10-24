@@ -1,5 +1,5 @@
 class Buildings:
-    def __init__(self, name, health_imp, stress_lvl_imp, object_type="buildings", script="Time to move on! Where would you like to go now?"):
+    def __init__(self, name, health_imp, stress_lvl_imp, object_type="buildings", script="Time to move on! Where would you like to go now? Remember, a place can really affect your well-being..."):
         self.name = name
         self.health_imp = health_imp
         self.stress_lvl_imp = stress_lvl_imp
@@ -16,13 +16,13 @@ class Buildings:
 
 
 class Options(Buildings):#change to options!
-    def __init__(self, name, health_imp, stress_lvl_imp, location, positive_choice, phrase, object_type="option", script="Do you... "):
+    def __init__(self, name, health_imp, stress_lvl_imp, location, positive_choice, phrase, object_type="option", script="****Do you...**** "):
         super().__init__(name, health_imp, stress_lvl_imp, object_type, script)
         self.location = location
         self.phrase = phrase
         self.positive_choice = positive_choice
     
-    def print_script(self): #Prints Options and Mobs menu
+    def print_script(self): #Prints Options menu
         print(self.script)
         for idx, item in enumerate(self.phrase):
             print(f"{idx+1}. {item}")
@@ -30,7 +30,7 @@ class Options(Buildings):#change to options!
 
 class Mobs(Options):
     def __init__(self, name, health_imp, stress_lvl_imp, location, positive_choice, hero_status_imp, phrase, nickname="Peter"):
-        super().__init__(name, health_imp, stress_lvl_imp, location, positive_choice, phrase, "people", "Spidey sense is kicking in! Who do you want to talk to?")
+        super().__init__(name, health_imp, stress_lvl_imp, location, positive_choice, phrase, "people", "Spidey sense is kicking in!\n****Who do you want to talk to? ****")
         self.hero_status_imp = hero_status_imp
         self.nickname = nickname
         # super().print_script(self)
