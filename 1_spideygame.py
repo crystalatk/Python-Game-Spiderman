@@ -11,9 +11,7 @@ import os
 def clear(): 
     call('clear' if os.name =='posix' else 'cls') 
 
-
 clear() 
-
 
 # Buildings Instantiation
 home = Buildings("home", 5, -10)
@@ -92,7 +90,7 @@ def print_menu(temp_list, curr_set):
             if user_choice <= len(temp_list) - 1 and user_choice >=0:
                 while_break = False
             else:
-                print(error_message)
+                raise ValueError
         except ValueError:
             print(error_message)
     current_item = temp_list[user_choice]
@@ -178,6 +176,8 @@ while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0
         except ValueError:
             print(error_message)
 
+    clear()
+
     if user_choice_option == curr_option.positive_choice:
         spidey.adjust_lvl_positive_choice(curr_option, level_multiplier)
         print("\nAmazing!\nGood choices now may result in some hero points later...")
@@ -190,13 +190,15 @@ while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0
 
     if spidey.end_game_check():
         break
-    
+     
     # ***User chooses their Person to Interact with:***
     print(f"\n\nThose earlier choices looked like they affected your health and your stress levels. But the real goal is getting those Hero points!\nLet's see if we can find the right person to help Peter Parker become a true Hero!")
 
     current_list = print_menu(associated_mobs, mj) # I use MJ here, but any mob would work...
     current_mob = current_list[0]
     curr_number = current_list[1] + 1
+
+    clear() 
 
     if user_positive: #this ties the person's phrase to the option the user chose earlier
         spidey.adjust_lvl_positive_choice(current_mob, level_multiplier)
@@ -214,6 +216,8 @@ while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0
     current_location = current_list[0]
     spidey.adjust_lvl_positive_choice(current_list[0], level_multiplier)
 
+    clear() 
+    
     print(f"\n\nWelcome to {current_location.name}. I hope you have good luck here and an amazing day! Remember, you need 100 Hero Points to win!\nAs a special trick, some of your stats are tied to the location you choose.\nGet ready to have an amazing day!")
 
     if spidey.end_game_check():
