@@ -1,19 +1,10 @@
 class Buildings:
-    def __init__(self, name, health_imp, stress_lvl_imp, object_type="buildings", script="Time to move on! Where would you like to go now? Remember, a place can really affect your well-being..."):
+    def __init__(self, name, health_imp, stress_lvl_imp, object_type="buildings", script="It's time to move! Where would you like to go? Remember, a place can really affect your well-being..."):
         self.name = name
         self.health_imp = health_imp
         self.stress_lvl_imp = stress_lvl_imp
         self.object_type = object_type
         self.script = script
-
-    # def print_script(self, curr_location): #Prints buildings menu
-       
-    #     print(self.script)
-    #     for idx, item in enumerate(buildings_list.name):
-    #         if self.buildings_list != curr_location:
-    #             print(f"{idx+1}. {item}")
-
-
 
 class Options(Buildings):#change to options!
     def __init__(self, name, health_imp, stress_lvl_imp, location, positive_choice, phrase, object_type="option", script="****Do you...**** "):

@@ -8,7 +8,7 @@ import random
 
 # Buildings Instantiation
 home = Buildings("home", 5, -10)
-school = Buildings("school", -2, 5)
+school = Buildings("school", -5, 5)
 bus = Buildings("the bus", -5, 5)
 park = Buildings("the park", 5, -5)
 
@@ -57,8 +57,6 @@ change = Options("change", 5, -5, bus, 2, ["search your pockets in vain, no chan
 kindness = Options("kindness", 10, -20, bus, 1, ["give up your seat for the pregnant mom of three", "listen to your music and play on your phone"])
 
 
-
-
 # Setting variables: if I update any buildings, options, or mobs, these must be updated!
 mobs_list = [aunt_may, mj, ned, happy, tony_stark, quentin_beck, flash_thompson, good_thing_1]
 
@@ -69,16 +67,25 @@ buildings_list = [home, school, bus, park]
 # To check player stats
 result = ""
 
-# check_stats = f"{result}\n\n****Your current stats**** \nHealth: {spidey.health}\nStress Level: {spidey.stress_lvl}\nHero Points: {spidey.hero_status}"
-
 current_location = home
 
-# Set up Function to Print Menu for the Mobs and Location (Options is dont within the class)
+error_message = "Choose a number that matches a choice!"
+
+# Set up Function to Print Menu for the Mobs and Location (Options is done within the class so I can practice calling a method within the class and because they print a phrase...)
 def print_menu(temp_list, curr_set):
     print(curr_set.script)
     for idx, item in enumerate(temp_list):
         print(f"{idx+1}. {item.name}")
-    user_choice = int(input("****Choose one: *****\n")) - 1
+    while_break = True
+    while while_break:
+        try:
+            user_choice = int(input("****Choose one: *****\n")) - 1
+            if user_choice <= len(temp_list) - 1 and user_choice >=0:
+                while_break = False
+            else:
+                print(error_message)
+        except ValueError:
+            print(error_message)
     current_item = temp_list[user_choice]
     return [current_item, user_choice] #For mobs, we need this list. 
 
@@ -92,7 +99,7 @@ print("""
     .-'`. .-":        o      ___     ($o              
  .-'.-  .'   ;      ,st+.  .' , \    ($               
 :_..-+""    :       T   "^T==^;\;;-._ $\              
-\''''''\-,   ;       '    /  `-:-// / )$\/\             
+\''''''\-,   ;       '    /  `-:-// / )$\             
         :   ;           /   /  :/ / /dP               
         :   :          /   :    )^-:_.l               
         ;    ;        /    ;    `.___, \           .-,
@@ -121,14 +128,16 @@ print("""
                    `-.___.-'
     """)
 
-print(f"\nWelcome to the choose your own adventure Spider-Man game!\nIn this game, you want to achieve Hero status by getting 100 Hero points!\nBut be careful, too much stress (stess level > 100) or too low health (health = 0), will end your story!\n\n{result}\n\n****Your current stats**** \nHealth: {spidey.health}\nStress Level: {spidey.stress_lvl}\nHero Points: {spidey.hero_status}\n\nGet ready to have an amazing day!\n\n\n")
+print(f"\nWelcome to the choose your own adventure Spider-Man game!\nIn this game, you want to achieve Hero status by getting 100 Hero points!\nBut be careful, too much stress (stess level > 100) or too low health (health = 0), will end your story!\n\nGet ready to have an amazing day!\n\n")
 
-while spidey.hero_status < 100 or spidey.stress_lvl < 100 or spidey.health > 0:#Game play loop. This loop ends when game play parameters are met
+spidey.end_game_check()
+
+while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0:#Game play loop. This loop ends when game play parameters are met
     
     associated_mobs = [] #This creates a list of mobs at the locations we chose
     associated_options = []#This creates a list of options at the location we chose
     temp_build_list = []#This creates the list of buildings a user can choose from each round. We are taking out the current building.
-
+    
     # These for loops will add the options, mobs, and locationss that are associated with the current location
     for option_item in options_list:
         if option_item.location.name == current_location.name:
@@ -140,24 +149,36 @@ while spidey.hero_status < 100 or spidey.stress_lvl < 100 or spidey.health > 0:#
         if current_location != loc_item:#We are removing the current building from the list. You can't go home if you are already home.
             temp_build_list.append(loc_item)
 
+     # ***User Chooses their Option*** 
     current_option_number = random.randrange(0, len(associated_options) -1, 1) #This will give me a random option each time. Within the parenthesis (start, end, incriments)     
     curr_option = associated_options[current_option_number]  #This will give us a randomly picked option from the options available at this location. The user will continue to have new experiences.    
     
-    # ***User Chooses their Option***   
     print(f"Looks like you are at {current_location.name}. Now that you are here, you've got some choices to make. If they are good, it will increase your health. These choices might even make people happier to see you!\n")
     curr_option.print_script()
-    user_choice_option = int(input("Please choose: \n"))
+
+    while_break = True
+    while while_break:
+        try:
+            user_choice_option = int(input("Please choose: \n"))
+            if user_choice_option == 2 or user_choice_option ==1:
+                while_break = False
+            else:
+                print(error_message)
+        except ValueError:
+            print(error_message)
+
     if user_choice_option == curr_option.positive_choice:
         spidey.adjust_lvl_positive_choice(curr_option)
-        result = "\nAmazing!\nGood choices now may result in some hero points later..."
+        print("\nAmazing!\nGood choices now may result in some hero points later...")
         user_positive = True
 
     else: #If things go negatively!
         spidey.adjust_lvl_negative_choice(curr_option)
-        result = "\nOh man!\nI hope these bad choices don't hurt you later."
+        print("\nOh man!\nI hope these bad choices don't hurt you later.")
         user_positive = False
 
-    print(f"\n\n****Your current stats**** \nHealth: {spidey.health}\nStress Level: {spidey.stress_lvl}\nHero Points: {spidey.hero_status}")
+    if spidey.end_game_check():
+        break
     
     # ***User chooses their Person to Interact with:***
     print(f"\n\nThose earlier choices looked like they affected your health and your stress levels. But the real goal is getting those Hero points!\nLet's see if we can find the right person to help Peter Parker become a true Hero!")
@@ -171,20 +192,24 @@ while spidey.hero_status < 100 or spidey.stress_lvl < 100 or spidey.health > 0:#
         result = "Amazing! You are moving up in the world!"   
     else: #If things go negatively!
         spidey.adjust_lvl_negative_choice(current_mob)
-        print(current_mob.name)
         result = ""
+    print(f"\n\n\"{current_mob.phrase[current_list[1]]}\" --{current_mob.name} \n\n{result}")
 
-    # ***User chooses a new location***
-    print(f"\n\n\"{current_mob.phrase[current_list[1]]}\" --{current_mob.name} \n\n{result}\n\n****Your current stats**** \nHealth: {spidey.health}\nStress Level: {spidey.stress_lvl}\nHero Points: {spidey.hero_status}\n\n")
+    if spidey.end_game_check():
+        break
 
+        # ***User chooses a new location***
     current_list = print_menu(temp_build_list, current_location)
     current_location = current_list[0]
     spidey.adjust_lvl_positive_choice(current_list[0])
 
-    print(f"\n\nWelcome to {current_location.name}. I hope you have good luck here and an amazing day! Remember, you need 100 Hero Points to win!\nAs a special trick, some of your stats are tied to the location you choose.\n\n****Your current stats**** \nHealth: {spidey.health}\nStress Level: {spidey.stress_lvl}\nHero Points: {spidey.hero_status}\n\nGet ready to have an amazing day!")
+    print(f"\n\nWelcome to {current_location.name}. I hope you have good luck here and an amazing day! Remember, you need 100 Hero Points to win!\nAs a special trick, some of your stats are tied to the location you choose.\nGet ready to have an amazing day!")
 
+    if spidey.end_game_check():
+        break
+   
 # Win or lose statements
-if spidey.hero_status == 100:
+if spidey.hero_status >= 100:
     print("\n\nYou did it! You are a hero and an Avenger!\nCongratulations!!!")
 else:
-    print("\n\nYou mad some bad choices, Spider-Man. You lose!")
+    print("\n\nYou made some bad choices, Spider-Man. You lose!")
