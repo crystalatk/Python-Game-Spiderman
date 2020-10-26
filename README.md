@@ -12,9 +12,10 @@ In this game, you are Spider-Man and you are trying to achieve ***Hero status***
 Also, be careful! As game play continues, each choice becomes more important! 
 
 ## Avengers Unite!
+Beginning Game Play
 
 ![Beginning glame play: Welcome Message and Spider-Man image](screenshots/welcome_screen.png)
 
-Beginning Game Play
 
+Example of a Menu and Spider-Man levels
 ![An example of a menu with Spider-Man's levels](screenshots/choices_with_levels_quote.png)
