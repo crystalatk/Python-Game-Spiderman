@@ -1,7 +1,3 @@
-from classes_interactions import Buildings
-from classes_interactions import Mobs
-from classes_interactions import Options
-
 class Spiderman:
     def __init__(self):
         self.name = "Spider-man"

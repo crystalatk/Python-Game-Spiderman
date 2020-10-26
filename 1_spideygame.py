@@ -1,4 +1,4 @@
-from classes_interactions import Buildings, Options, Mobs
+from classes_interactions import Building, Option, Mob
 from classes_spiderman import Spiderman
 
 # importing "random" for random operations 
@@ -14,52 +14,52 @@ def clear():
 clear() 
 
 # Buildings Instantiation
-home = Buildings("home", 5, -10)
-school = Buildings("school", -5, 5)
-bus = Buildings("the bus", -5, 5)
-park = Buildings("the park", 5, -5)
+home = Building("home", 5, -10)
+school = Building("school", -5, 5)
+bus = Building("the bus", -5, 5)
+park = Building("the park", 5, -5)
 
 # Characters Instantiation
-aunt_may = Mobs("Aunt May", 5, -5, home, 2,  -10, ["You're late?!? I thought that you could sense the time, with your Peter-tingle.", "You know what? You should pack your suit, just in case. I have a tingle about it."] )
+aunt_may = Mob("Aunt May", 5, -5, home, 2,  -10, ["You're late?!? I thought that you could sense the time, with your Peter-tingle.", "You know what? You should pack your suit, just in case. I have a tingle about it."] )
 
-ned = Mobs("Ned", -5, 5, home, 2, 5, ["Oh man, we are in so much trouble....", "Oh man, I'm so glad you are here!"])
+ned = Mob("Ned", -5, 5, home, 2, 5, ["Oh man, we are in so much trouble....", "Oh man, I'm so glad you are here!"])
 
-mj = Mobs("MJ", 5, -10, school, 1, 10, ["You know Suzanne Yang thinks that you’re a male escort?", "What is it with you and Spider-Man?"])
+mj = Mob("MJ", 5, -10, school, 1, 10, ["You know Suzanne Yang thinks that you’re a male escort?", "What is it with you and Spider-Man?"])
 
-tony_stark = Mobs("Tony Stark", 10, -15, park, 1, 20, ["Don't do anything I would do, and definitely don't do anything I wouldn't do. There's a little gray area in there, and that's where you operate.", "If You’re Nothing Without That Suit, Then You Shouldn't Have It."])
+tony_stark = Mob("Tony Stark", 10, -15, park, 1, 20, ["Don't do anything I would do, and definitely don't do anything I wouldn't do. There's a little gray area in there, and that's where you operate.", "If You’re Nothing Without That Suit, Then You Shouldn't Have It."])
 
-flash_thompson = Mobs("Flash Thompson", 0, 20, school, 1, -5, ["I post stupid videos daily for people to like me!", "Penis Parker"], "Penis Parker")
+flash_thompson = Mob("Flash Thompson", 0, 20, school, 1, -5, ["I post stupid videos daily for people to like me!", "Penis Parker"], "Penis Parker")
 
-happy = Mobs("Happy", -5, 10, park, 2, -5, ["Heads up, Nick Fury is calling you.", "The one thing that Tony did that he didn’t second-guess was picking you."], "Parker")
+happy = Mob("Happy", -5, 10, park, 2, -5, ["Heads up, Nick Fury is calling you.", "The one thing that Tony did that he didn’t second-guess was picking you."], "Parker")
 
-good_thing_1 = Mobs("Child with pregnant mom", 15, -10, bus, 1, 10, ["You're amazing!, just like Spider-Man!", "You suck!"], "Spider-Man")
+good_thing_1 = Mob("Child with pregnant mom", 15, -10, bus, 1, 10, ["You're amazing!, just like Spider-Man!", "You suck!"], "Spider-Man")
 
-quentin_beck = Mobs("Quentin Beck", -15, 10, bus, 2, -10, ["I don’t think you know what’s real, Peter. You need to wake up! I mean, look at yourself. You are just a scared little kid in a sweatsuit! I", "You’ll see, Peter. People, they need to believe. And nowadays, they’ll believe anything."], "Night_Monkey")
+quentin_beck = Mob("Quentin Beck", -15, 10, bus, 2, -10, ["I don’t think you know what’s real, Peter. You need to wake up! I mean, look at yourself. You are just a scared little kid in a sweatsuit! I", "You’ll see, Peter. People, they need to believe. And nowadays, they’ll believe anything."], "Night_Monkey")
 
 # Options Instantiation
-late = Options('late', 5, -5, home, 1, ["Wake up on-time", "Wake up late"])
+late = Option('late', 5, -5, home, 1, ["Wake up on-time", "Wake up late"])
 
-dinner = Options("dinner", 5, -15, home, 2, ["come in five minutes late for dinner", "make dinner for Aunt May"])
+dinner = Option("dinner", 5, -15, home, 2, ["come in five minutes late for dinner", "make dinner for Aunt May"])
 
-room = Options("room", 5, -20, home, 1, ["clean your room", "wash your spidey suit in hot water"])
+room = Option("room", 5, -20, home, 1, ["clean your room", "wash your spidey suit in hot water"])
 
-forgot_homework = Options("hw", 5, -15, school, 2, ["Forget your Homework", "Finish all your work"])
+forgot_homework = Option("hw", 5, -15, school, 2, ["Forget your Homework", "Finish all your work"])
 
-sat_in_gum = Options("gum", 5, -10, school, 2, ["sit in gum", "look before you sit"])
+sat_in_gum = Option("gum", 5, -10, school, 2, ["sit in gum", "look before you sit"])
 
-silly = Options("silly", 10, -20, school, 1, ["make a jake that landed", "trip in front of MJ"])
+silly = Option("silly", 10, -20, school, 1, ["make a jake that landed", "trip in front of MJ"])
 
-poo = Options( "poo", 10, -15, park, 1, ["decide to rent a bike", "step in dog poo"])
+poo = Option( "poo", 10, -15, park, 1, ["decide to rent a bike", "step in dog poo"])
 
-ice_cream = Options("desert", 5, -5, park, 2, ["buy a frozen lemonade", "buy an icecream cone"])
+ice_cream = Option("desert", 5, -5, park, 2, ["buy a frozen lemonade", "buy an icecream cone"])
 
-litter_patrol = Options("litter", 5, -10, park, 1, ["pick up the piece of garbage on teh ground", "walk past the garbage, you have bigger plans today!"])
+litter_patrol = Option("litter", 5, -10, park, 1, ["pick up the piece of garbage on teh ground", "walk past the garbage, you have bigger plans today!"])
 
-helping_hand = Options("helping", 5, -10, bus, 1, ["help an old lady cross the street", "jaywalk"])
+helping_hand = Option("helping", 5, -10, bus, 1, ["help an old lady cross the street", "jaywalk"])
 
-change = Options("change", 5, -5, bus, 2, ["search your pockets in vain, no change for the bus!", "remember to bring your bus pass! Got it!"])
+change = Option("change", 5, -5, bus, 2, ["search your pockets in vain, no change for the bus!", "remember to bring your bus pass! Got it!"])
 
-kindness = Options("kindness", 10, -20, bus, 1, ["give up your seat for the pregnant mom of three", "listen to your music and play on your phone"])
+kindness = Option("kindness", 10, -20, bus, 1, ["give up your seat for the pregnant mom of three", "listen to your music and play on your phone"])
 
 
 # Setting variables: if I update any buildings, options, or mobs, these must be updated!
@@ -217,7 +217,7 @@ while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0
     spidey.adjust_lvl_positive_choice(current_list[0], level_multiplier)
 
     clear() 
-    
+
     print(f"\n\nWelcome to {current_location.name}. I hope you have good luck here and an amazing day! Remember, you need 100 Hero Points to win!\nAs a special trick, some of your stats are tied to the location you choose.\nGet ready to have an amazing day!")
 
     if spidey.end_game_check():
