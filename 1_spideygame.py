@@ -1,17 +1,25 @@
-from classes_interactions import Buildings
-from classes_interactions import Options
-from classes_interactions import Mobs
+from classes_interactions import Buildings, Options, Mobs
 from classes_spiderman import Spiderman
 
 # importing "random" for random operations 
 import random
+
+# import to clear screen
+from subprocess import call 
+import os 
+
+def clear(): 
+    call('clear' if os.name =='posix' else 'cls') 
+
+
+clear() 
+
 
 # Buildings Instantiation
 home = Buildings("home", 5, -10)
 school = Buildings("school", -5, 5)
 bus = Buildings("the bus", -5, 5)
 park = Buildings("the park", 5, -5)
-
 
 # Characters Instantiation
 aunt_may = Mobs("Aunt May", 5, -5, home, 2,  -10, ["You're late?!? I thought that you could sense the time, with your Peter-tingle.", "You know what? You should pack your suit, just in case. I have a tingle about it."] )
@@ -29,7 +37,6 @@ happy = Mobs("Happy", -5, 10, park, 2, -5, ["Heads up, Nick Fury is calling you.
 good_thing_1 = Mobs("Child with pregnant mom", 15, -10, bus, 1, 10, ["You're amazing!, just like Spider-Man!", "You suck!"], "Spider-Man")
 
 quentin_beck = Mobs("Quentin Beck", -15, 10, bus, 2, -10, ["I don’t think you know what’s real, Peter. You need to wake up! I mean, look at yourself. You are just a scared little kid in a sweatsuit! I", "You’ll see, Peter. People, they need to believe. And nowadays, they’ll believe anything."], "Night_Monkey")
-
 
 # Options Instantiation
 late = Options('late', 5, -5, home, 1, ["Wake up on-time", "Wake up late"])
@@ -64,7 +71,9 @@ options_list = [late, dinner, room, forgot_homework, sat_in_gum, silly, poo, ice
 
 buildings_list = [home, school, bus, park]
 
-# To check player stats
+level_multiplier = 1
+
+# Defining common variables
 result = ""
 
 current_location = home
@@ -91,6 +100,8 @@ def print_menu(temp_list, curr_set):
 
 # Spiderman Instantiation
 spidey = Spiderman()
+
+
 
 # ****Game Play Begins******
 print("""              
@@ -168,12 +179,12 @@ while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0
             print(error_message)
 
     if user_choice_option == curr_option.positive_choice:
-        spidey.adjust_lvl_positive_choice(curr_option)
+        spidey.adjust_lvl_positive_choice(curr_option, level_multiplier)
         print("\nAmazing!\nGood choices now may result in some hero points later...")
         user_positive = True
 
     else: #If things go negatively!
-        spidey.adjust_lvl_negative_choice(curr_option)
+        spidey.adjust_lvl_negative_choice(curr_option, level_multiplier)
         print("\nOh man!\nI hope these bad choices don't hurt you later.")
         user_positive = False
 
@@ -188,10 +199,10 @@ while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0
     curr_number = current_list[1] + 1
 
     if user_positive: #this ties the person's phrase to the option the user chose earlier
-        spidey.adjust_lvl_positive_choice(current_mob)
+        spidey.adjust_lvl_positive_choice(current_mob, level_multiplier)
         result = "Amazing! You are moving up in the world!"   
     else: #If things go negatively!
-        spidey.adjust_lvl_negative_choice(current_mob)
+        spidey.adjust_lvl_negative_choice(current_mob, level_multiplier)
         result = ""
     print(f"\n\n\"{current_mob.phrase[current_list[1]]}\" --{current_mob.name} \n\n{result}")
 
@@ -201,13 +212,15 @@ while spidey.hero_status < 100 and spidey.stress_lvl < 100 and spidey.health > 0
         # ***User chooses a new location***
     current_list = print_menu(temp_build_list, current_location)
     current_location = current_list[0]
-    spidey.adjust_lvl_positive_choice(current_list[0])
+    spidey.adjust_lvl_positive_choice(current_list[0], level_multiplier)
 
     print(f"\n\nWelcome to {current_location.name}. I hope you have good luck here and an amazing day! Remember, you need 100 Hero Points to win!\nAs a special trick, some of your stats are tied to the location you choose.\nGet ready to have an amazing day!")
 
     if spidey.end_game_check():
         break
-   
+    
+    level_multiplier += 1
+
 # Win or lose statements
 if spidey.hero_status >= 100:
     print("\n\nYou did it! You are a hero and an Avenger!\nCongratulations!!!")
